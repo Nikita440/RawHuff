@@ -1,0 +1,56 @@
+uint8_t* Build(size_t size,struct FreqTable table[256],char * buff){
+    
+
+    for(int h = 10;h < 256;h++){
+        table[h].Code_size = 0;
+    }
+
+    
+    int index = 0;
+    char let;
+    size_t buff_point = 0;
+    uint8_t* arr = calloc(size,sizeof(char));
+   
+
+    for(int j = 0;j<size;j++){
+        
+        let = buff[j];
+        
+        for(int i = 0;i < 256;i++){
+            if(let == table[i].Symbol){
+                if(table[i].Code_size != 0){
+                    if(buff_point == 0 && table[i].Code_size + buff_point <= 8){
+                        int shift = 8 - table[i].Code_size;
+                        arr[index] = table[i].Code << shift;
+                    }
+                    if(buff_point != 0 && table[i].Code_size + buff_point <= 8){
+                        int shift1 = 8 - table[i].Code_size - buff_point;
+                        arr[index] |= table[i].Code << shift1;
+                    }                                        // bufpoint 5 // size = 6
+                    if(table[i].Code_size + buff_point > 8){ // bufpoint = 4 //size = 6
+                        int leftoff = 8 - buff_point; //3 //6 0b00000011
+                        int shift2 = table[i].Code_size - leftoff; //1
+                        arr[index] |= table[i].Code >> shift2; // here we got the high bits set now we need to set the low ones at the top
+                        index++;
+                        arr[index] = table[i].Code << (8 - shift2); // set the low bits to the start of the index arr
+                            
+                    }
+          
+
+                        buff_point += table[i].Code_size;
+                        
+                    
+                    
+                }
+            }
+
+            if(buff_point > 8){
+                buff_point = buff_point - 8;
+        
+        }
+    }
+   
+}
+
+ return arr;
+}
