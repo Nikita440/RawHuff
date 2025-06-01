@@ -15,8 +15,8 @@ DECODER_SRCS = $(wildcard $(DECODER_DIR)/*.c)
 DECODER_OBJS = $(DECODER_SRCS:.c=.o)
 
 # Output executables
-TARGET = my_program
-DECODER_TARGET = decoder_program
+TARGET = encode_program 
+DECODER_TARGET = decode_program
 
 # Default rule builds both programs
 all: $(TARGET) $(DECODER_TARGET)

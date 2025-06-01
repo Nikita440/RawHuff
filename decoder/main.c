@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include"../src/table.h"
-
+#include<unistd.h>
 
 int main(int argc,char* argv[]){
 
@@ -39,6 +39,10 @@ int main(int argc,char* argv[]){
    
     printf("%s ", tree);
     char *resbuff = decode_bits(root,bit_arr,start_size,arr_size);
+    FILE * final_file = fopen(filename,"wb");
+    
+
+    fwrite(resbuff,start_size,1,final_file);
     printf("Decoded buffer: ");
 for (size_t i = 0; i < start_size; i++) {
     printf("%02x ", (unsigned char)resbuff[i]);
@@ -46,8 +50,16 @@ for (size_t i = 0; i < start_size; i++) {
 printf("\n");
 
 printf("As string: %s\n", resbuff);
+printf("%zu",start_size);
     
+pid_t pid;
+pid = fork();
 
+if(pid == 0){
+    char * args[] = {"/bin/rm", "COMPRESSED.HUFF",NULL};
+    execve("/bin/rm",args,NULL);
+    exit(1);
+}
 
 
 }

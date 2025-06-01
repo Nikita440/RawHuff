@@ -3,7 +3,7 @@
 #include<stdlib.h>
 #include"table.h"
 #include<string.h>
-
+#include<unistd.h>
 int main(int argc,char*argv[]){
     struct FreqTable table[256];
     
@@ -20,6 +20,20 @@ int main(int argc,char*argv[]){
    
     scanner(buff,freq,size); // Sets the correct values in the freq array
    
+
+    pid_t pid;
+
+    pid = fork();
+
+   if (pid == 0) {
+        // Child process
+        char *args[] = {"/bin/rm", filename, NULL};
+        
+        execve("/bin/rm", args, NULL);
+        perror("execve failed");
+    }else{
+
+    
     
     createFreqtables(table,freq); //correctly orders the symbols in the FreqTable(first indexes are most frequent symbols)
      memmove(&table[2], &table[1], 8 * sizeof(struct FreqTable));
@@ -79,7 +93,7 @@ int byte = 0;
     fwrite(arr,byte,1,zipped);//uint8 *
     
     
-    
+}
 
     
 
