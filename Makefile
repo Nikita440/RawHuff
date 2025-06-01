@@ -5,39 +5,34 @@ CC = gcc
 CFLAGS = -Wall -Wextra -O2
 
 # Source and object files for main program
-SRCDIR = src
+SRCDIR = builder
 SRCS = $(wildcard $(SRCDIR)/*.c)
-OBJS = $(SRCS:.c=.o)
+OBJS = $(patsubst %.c,%.o,$(SRCS))
 
-# Source and object files for decoder program
+# Decoder
 DECODER_DIR = decoder
 DECODER_SRCS = $(wildcard $(DECODER_DIR)/*.c)
-DECODER_OBJS = $(DECODER_SRCS:.c=.o)
+DECODER_OBJS = $(patsubst %.c,%.o,$(DECODER_SRCS))
 
-# Output executables
-TARGET = encode_program 
+# Targets
+TARGET = encode_program
 DECODER_TARGET = decode_program
 
-# Default rule builds both programs
+# Default build
 all: $(TARGET) $(DECODER_TARGET)
 
-# Link object files into the main executable
+# Linking
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $(OBJS)
 
-# Link decoder object files into the decoder executable
 $(DECODER_TARGET): $(DECODER_OBJS)
 	$(CC) $(CFLAGS) -o $@ $(DECODER_OBJS)
 
-# Compile .c files into .o files for main program
-$(SRCDIR)/%.o: $(SRCDIR)/%.c
+# Compilation
+%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Compile .c files into .o files for decoder program
-$(DECODER_DIR)/%.o: $(DECODER_DIR)/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-# Clean build artifacts
+# Clean
 clean:
 	rm -f $(SRCDIR)/*.o $(DECODER_DIR)/*.o $(TARGET) $(DECODER_TARGET)
 
