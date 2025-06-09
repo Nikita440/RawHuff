@@ -53,14 +53,7 @@ printf("\n");
 printf("As string: %s\n", resbuff);
 printf("%zu",start_size);
     
-pid_t pid;
-pid = fork();
 
-if(pid == 0){
-    char * args[] = {"/bin/rm", "COMPRESSED.HUFF",NULL};
-    execve("/bin/rm",args,NULL);
-    exit(1);
-}
 
 
 }

@@ -24,15 +24,8 @@ int main(int argc,char*argv[]){
 
     pid_t pid;
 
-    pid = fork();
+   
 
-   if (pid == 0) {
-        // Child process
-        char *args[] = {"/bin/rm", filename, NULL};
-        
-        execve("/bin/rm", args, NULL);
-        perror("execve failed");
-    }else{
 
     
     
@@ -94,7 +87,7 @@ int byte = 0;
     fwrite(arr,byte,1,zipped);//uint8 *
     
     
-}
+
 
     
 
