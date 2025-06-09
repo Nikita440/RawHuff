@@ -1,4 +1,5 @@
 #include"table.h"
+#include<stdint.h>
 #ifndef SEARCHER_H
 #define SEARCHER_H
 

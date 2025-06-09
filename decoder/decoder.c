@@ -1,8 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include"../src/table.h"
+#include"../builder/table.h"
 
-
+#include<stdint.h>
 
 
 char* decode_bits(HuffNode* root, uint8_t* enc_arr, size_t orig_size, int arr_size) {

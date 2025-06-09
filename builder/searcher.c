@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include"searcher.h"
 #include"table.h"
-
+#include<stdint.h>
 char * readFile(char * name,size_t * out_size){
     FILE * file = fopen(name,"rb");
     if(!file){

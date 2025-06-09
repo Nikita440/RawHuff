@@ -4,6 +4,7 @@
 #include"table.h"
 #include<string.h>
 #include<unistd.h>
+#include<stdint.h>
 int main(int argc,char*argv[]){
     struct FreqTable table[256];
     

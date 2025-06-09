@@ -1,7 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include"../src/table.h"
+#include"../builder/table.h"
 #include<unistd.h>
+#include<stdint.h>
 
 int main(int argc,char* argv[]){
 

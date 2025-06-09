@@ -1,5 +1,5 @@
-#include"../src/table.h"
-
+#include"../builder/table.h"
+#include<stdint.h>
 
 HuffNode * create_leaf(unsigned char symbol){
     HuffNode * node = malloc(sizeof(HuffNode));
